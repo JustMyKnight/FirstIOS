@@ -10,9 +10,9 @@
 		84C6FD291B01964900E2325A /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD281B01964900E2325A /* DetailViewController.xib */; };
 		84C6FD2C1B01974800E2325A /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FD2B1B01974800E2325A /* Post.m */; };
 		84C6FD2E1B0197C600E2325A /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD2D1B0197C600E2325A /* MasterViewController.xib */; };
-		84C6FD321B0198B600E2325A /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FD301B0198B600E2325A /* CustomCell.m */; };
-		84C6FD331B0198B600E2325A /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD311B0198B600E2325A /* CustomCell.xib */; };
 		84C6FD351B01A10D00E2325A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C6FD341B01A10D00E2325A /* libPods.a */; };
+		84C6FD3C1B01AD6500E2325A /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FD3A1B01AD6500E2325A /* CustomCell.m */; };
+		84C6FD3D1B01AD6500E2325A /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD3B1B01AD6500E2325A /* CustomCell.xib */; };
 		84CC7A3A1AF90BEA00A1ED98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC7A391AF90BEA00A1ED98 /* main.m */; };
 		84CC7A3D1AF90BEA00A1ED98 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC7A3C1AF90BEA00A1ED98 /* AppDelegate.m */; };
 		84CC7A401AF90BEA00A1ED98 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC7A3F1AF90BEA00A1ED98 /* MasterViewController.m */; };
@@ -41,10 +41,10 @@
 		84C6FD2A1B01974800E2325A /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		84C6FD2B1B01974800E2325A /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		84C6FD2D1B0197C600E2325A /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
-		84C6FD2F1B0198B600E2325A /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = "../../live.goodline-News-master - копия - копия/live.goodline News/CustomCell.h"; sourceTree = "<group>"; };
-		84C6FD301B0198B600E2325A /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = "../../live.goodline-News-master - копия - копия/live.goodline News/CustomCell.m"; sourceTree = "<group>"; };
-		84C6FD311B0198B600E2325A /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCell.xib; path = "../../live.goodline-News-master - копия - копия/live.goodline News/CustomCell.xib"; sourceTree = "<group>"; };
 		84C6FD341B01A10D00E2325A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		84C6FD391B01AD6500E2325A /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		84C6FD3A1B01AD6500E2325A /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		84C6FD3B1B01AD6500E2325A /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		84CC7A341AF90BEA00A1ED98 /* Parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC7A381AF90BEA00A1ED98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84CC7A391AF90BEA00A1ED98 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,9 +129,9 @@
 		84C6FD381B01A57D00E2325A /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
-				84C6FD2F1B0198B600E2325A /* CustomCell.h */,
-				84C6FD301B0198B600E2325A /* CustomCell.m */,
-				84C6FD311B0198B600E2325A /* CustomCell.xib */,
+				84C6FD391B01AD6500E2325A /* CustomCell.h */,
+				84C6FD3A1B01AD6500E2325A /* CustomCell.m */,
+				84C6FD3B1B01AD6500E2325A /* CustomCell.xib */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 			files = (
 				84CC7A481AF90BEA00A1ED98 /* Images.xcassets in Resources */,
 				84C6FD291B01964900E2325A /* DetailViewController.xib in Resources */,
-				84C6FD331B0198B600E2325A /* CustomCell.xib in Resources */,
+				84C6FD3D1B01AD6500E2325A /* CustomCell.xib in Resources */,
 				84C6FD2E1B0197C600E2325A /* MasterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,7 +358,7 @@
 				84CC7A3A1AF90BEA00A1ED98 /* main.m in Sources */,
 				84CC7A431AF90BEA00A1ED98 /* DetailViewController.m in Sources */,
 				84C6FD2C1B01974800E2325A /* Post.m in Sources */,
-				84C6FD321B0198B600E2325A /* CustomCell.m in Sources */,
+				84C6FD3C1B01AD6500E2325A /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

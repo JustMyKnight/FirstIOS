@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface DetailViewController : UIViewController
-
-@property (strong, nonatomic) id detailItem;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
-
+@property (strong, nonatomic) NSString *linkToFullPost;
+@property (strong, nonatomic) NSString *postTitle;
 @end
 

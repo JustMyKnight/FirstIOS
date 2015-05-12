@@ -8,88 +8,147 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "TFHpple.h"
+#import "AFNetworking.h"
+#import "Post.h"
+#import "CustomCell.h"
+#import "UIImageView+AFNetworking.h"
+@interface MasterViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@interface MasterViewController ()
+@property (strong, nonatomic) NSMutableArray *posts;
+@property (strong, nonatomic) DetailViewController *DetailViewController;
+@property (strong, nonatomic) UINavigationController *DetailNavigationController;
+@property int pageNumber;
 
-@property NSMutableArray *objects;
 @end
 
 @implementation MasterViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.clearsSelectionOnViewWillAppear = NO;
-        self.preferredContentSize = CGSizeMake(320.0, 600.0);
-    }
-}
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.navigationItem.title = @"GoodLineNews";
+    AFHTTPRequestOperationManager *data = [AFHTTPRequestOperationManager manager];
+    data.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [data GET:@"http://live.goodline.info/guest" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         [self parser:responseObject];
+         
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"Error: %@", error);
+         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network problem"
+                                                             message:[error localizedDescription]
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"Ok"
+                                                   otherButtonTitles:nil];
+         [alertView show];
+     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        _posts = [[NSMutableArray alloc] init];
+        _DetailViewController = [[DetailViewController alloc] init];
+        _DetailNavigationController = [[UINavigationController alloc] initWithRootViewController:_DetailViewController];
+        _pageNumber = 0;
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    return self;
 }
 
-#pragma mark - Segues
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
-        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-        controller.navigationItem.leftItemsSupplementBackButton = YES;
+- (void) parser:(NSData *)responseData
+{
+    TFHpple *parser = [TFHpple hppleWithHTMLData:responseData];
+    NSString *XpathString = @"//article[@class='topic topic-type-topic js-topic out-topic']";
+    NSArray *postNodes = [parser searchWithXPathQuery:XpathString];
+    if (![postNodes count] == 0)
+        _pageNumber += 1;
+    for (TFHppleElement *postNode in postNodes)
+    {
+        Post *post = [[Post alloc] init];
+        TFHppleElement *textPart = [postNode firstChildWithClassName:@"wraps out-topic"];
+        TFHppleElement *titleNode = [[[textPart firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"];
+        post.title = titleNode.text;
+        post.linkToFullPost = [titleNode objectForKey:@"href"];
+        post.timePosted = [[textPart firstChildWithClassName:@"topic-header"] firstChildWithTagName:@"time"].text;
+        TFHppleElement *imageNode = [[[postNode firstChildWithClassName:@"preview"] firstChildWithTagName:@"a"] firstChildWithTagName:@"img"];
+        post.linkToPreview = [imageNode objectForKey:@"src"];
+        [_posts addObject:post];
     }
+    [self.tableView reloadData];
 }
 
-#pragma mark - Table View
+#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_posts count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90;
+}
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"Cell";
+    CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomCell"owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    cell.mainLabel.text = [_posts[indexPath.row] title];
+    [cell.imageBlock setImageWithURL: [NSURL URLWithString:[_posts[indexPath.row] linkToPreview]]];
+    cell.subLabel.text = [[_posts[indexPath.row] timePosted] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _DetailViewController.linkToFullPost = [_posts[indexPath.row] linkToFullPost];
+    _DetailViewController.postTitle = [_posts[indexPath.row] title];
+    [self presentViewController:_DetailNavigationController animated:YES completion:nil];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger totalRow = [tableView numberOfRowsInSection:indexPath.section];
+    if(indexPath.row == totalRow -1)
+    {
+        AFHTTPRequestOperationManager *data = [AFHTTPRequestOperationManager manager];
+        data.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [data GET:[NSString stringWithFormat:@"http://live.goodline.info/guest/page%ld", (long)(_pageNumber+1)] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             [self parser:responseObject];
+         }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         {
+             NSLog(@"Error: %@", error);
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network problem"
+                                                                 message:[error localizedDescription]
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"Ok"
+                                                       otherButtonTitles:nil];
+             [alertView show];
+         }];
     }
 }
 

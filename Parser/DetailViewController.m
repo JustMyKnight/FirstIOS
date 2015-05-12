@@ -7,40 +7,132 @@
 //
 
 #import "DetailViewController.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "TFHpple.h"
 
 @interface DetailViewController ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property int yOffset;
 @end
 
 @implementation DetailViewController
 
-#pragma mark - Managing the detail item
-
-- (void)setDetailItem:(id)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-            
-        // Update the view.
-        [self configureView];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Назад" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+        leftBarButtonItem.tintColor = [UIColor blackColor];
+        [self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
+        
     }
+    return self;
 }
 
-- (void)configureView {
-    // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
-}
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
+    _scrollView.scrollEnabled = TRUE;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[_scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    _yOffset = 0;
+    NSMutableAttributedString *atrString = [[NSMutableAttributedString alloc] initWithString:_postTitle
+                                            ];
+    UITextView *textBlock = [self createTextViewWithText:atrString];
+    [_scrollView addSubview:textBlock];
+    AFHTTPRequestOperationManager *data = [AFHTTPRequestOperationManager manager];
+    data.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [data GET:_linkToFullPost parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         [self parser:responseObject];
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"Error: %@", error);
+         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network problem"
+                                                             message:[error localizedDescription]
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"Ok"
+                                                   otherButtonTitles:nil];
+         [alertView show];
+     }];
+}
+
+- (void)parser: (NSData *)data
+{
+    TFHpple *parser = [TFHpple hppleWithHTMLData:data];
+    NSString *XpathString = @"//div[@class='topic-content text']";
+    NSArray *postNodes = [parser searchWithXPathQuery:XpathString];
+    TFHppleElement *postNode = postNodes[0];
+    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:@""];
+    for (TFHppleElement *i in postNode.children)
+    {
+        NSAttributedString *tempString = [[NSAttributedString alloc] initWithString:@""];
+        tempString = [self FindContent:i];
+        [content appendAttributedString:tempString];
+    }
+    if (![content isEqual:@""])
+    {
+        UITextView *textBlock = [self createTextViewWithText:content];
+        [_scrollView addSubview:textBlock];
+        _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, _yOffset);
+    }
+}
+
+- (NSAttributedString *)FindContent:(TFHppleElement *)node
+{
+    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithString:@""];
+    if ([node isTextNode])
+    {
+        if ([node.parent.tagName characterAtIndex:0] == 'h')
+        {
+            return [[NSAttributedString alloc] initWithString: [NSString stringWithFormat:@"%@\n", node.content]
+                    ];
+        }
+        NSString *text = [node.content stringByReplacingOccurrencesOfString:@"\n " withString:@"\n"];
+        text = [text stringByReplacingOccurrencesOfString:@"	" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"\n\n" withString:@""];
+        return [[NSAttributedString alloc] initWithString: text];
+    }
+    else
+    {
+        if ([node hasChildren])
+        {
+            for (TFHppleElement *subNode in node.children)
+            {
+                if (![subNode.tagName isEqual:@"img"])
+                    [resultString appendAttributedString:[self FindContent: subNode]];
+            }
+        }
+    }
+    return resultString;
+}
+
+- (UITextView *)createTextViewWithText: (NSMutableAttributedString *) string
+{
+    UITextView *textBlock = [[UITextView alloc] initWithFrame:CGRectMake(0, _yOffset, _scrollView.frame.size.width, 10)];
+    textBlock.attributedText = string;
+    textBlock.userInteractionEnabled = FALSE;
+    textBlock.editable = FALSE;
+    textBlock.scrollEnabled = FALSE;
+    textBlock.textAlignment = NSTextAlignmentJustified;
+    CGSize size = [textBlock systemLayoutSizeFittingSize:textBlock.contentSize];
+    CGRect textRect = CGRectMake(10, _yOffset, _scrollView.frame.size.width-20, size.height);
+    textBlock.frame = textRect;
+    _yOffset += size.height;
+    return textBlock;
+}
+
+- (IBAction)back
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

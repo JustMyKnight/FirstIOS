@@ -13,6 +13,7 @@
 		84C6FD351B01A10D00E2325A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C6FD341B01A10D00E2325A /* libPods.a */; };
 		84C6FD3C1B01AD6500E2325A /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FD3A1B01AD6500E2325A /* CustomCell.m */; };
 		84C6FD3D1B01AD6500E2325A /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD3B1B01AD6500E2325A /* CustomCell.xib */; };
+		84C7EDF71B01FD5F00589E27 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C7EDF61B01FD5F00589E27 /* default.png */; };
 		84CC7A3A1AF90BEA00A1ED98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC7A391AF90BEA00A1ED98 /* main.m */; };
 		84CC7A3D1AF90BEA00A1ED98 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC7A3C1AF90BEA00A1ED98 /* AppDelegate.m */; };
 		84CC7A401AF90BEA00A1ED98 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC7A3F1AF90BEA00A1ED98 /* MasterViewController.m */; };
@@ -45,6 +46,7 @@
 		84C6FD391B01AD6500E2325A /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
 		84C6FD3A1B01AD6500E2325A /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		84C6FD3B1B01AD6500E2325A /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		84C7EDF61B01FD5F00589E27 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		84CC7A341AF90BEA00A1ED98 /* Parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CC7A381AF90BEA00A1ED98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84CC7A391AF90BEA00A1ED98 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		84CC7A361AF90BEA00A1ED98 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				84C7EDF61B01FD5F00589E27 /* default.png */,
 				84C6FD381B01A57D00E2325A /* CustomCell */,
 				84C6FD371B01A55D00E2325A /* DetailViewController */,
 				84C6FD361B01A52F00E2325A /* MasterViewController */,
@@ -300,6 +303,7 @@
 				84C6FD291B01964900E2325A /* DetailViewController.xib in Resources */,
 				84C6FD3D1B01AD6500E2325A /* CustomCell.xib in Resources */,
 				84C6FD2E1B0197C600E2325A /* MasterViewController.xib in Resources */,
+				84C7EDF71B01FD5F00589E27 /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

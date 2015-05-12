@@ -74,16 +74,36 @@
     NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:@""];
     for (TFHppleElement *i in postNode.children)
     {
-        NSAttributedString *tempString = [[NSAttributedString alloc] initWithString:@""];
-        tempString = [self FindContent:i];
-        [content appendAttributedString:tempString];
+        if ([i.tagName isEqual:@"img"])
+        {
+            if (![content isEqual:@""])
+            {
+                UITextView *textBlock = [self createTextViewWithText:content];
+                [_scrollView addSubview:textBlock];
+                _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, _yOffset);
+                content = [[NSMutableAttributedString alloc] initWithString:@""];
+            }
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _yOffset, _scrollView.frame.size.width-10, _scrollView.frame.size.width*9/16)];
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            [imageView setImageWithURL:[NSURL URLWithString:[i objectForKey:@"src"]]];
+            
+            [_scrollView addSubview:imageView];
+            _yOffset += imageView.frame.size.height;
+        }
+        else
+        {
+            NSAttributedString *tempString = [[NSAttributedString alloc] initWithString:@""];
+            tempString = [self FindContent:i];
+            [content appendAttributedString:tempString];
+        }
     }
-    if (![content isEqual:@""])
+   if (![content isEqual:@""])
     {
         UITextView *textBlock = [self createTextViewWithText:content];
         [_scrollView addSubview:textBlock];
         _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, _yOffset);
     }
+    
 }
 
 - (NSAttributedString *)FindContent:(TFHppleElement *)node

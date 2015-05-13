@@ -85,7 +85,10 @@
             }
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _yOffset, _scrollView.frame.size.width-10, _scrollView.frame.size.width*9/16)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [imageView setImageWithURL:[NSURL URLWithString:[i objectForKey:@"src"]]];
+            
+                        
+            [imageView setImageWithURL:[NSURL URLWithString:[i objectForKey:@"src"]] placeholderImage:[UIImage imageNamed:@"default.png"]];
+            
             
             [_scrollView addSubview:imageView];
             _yOffset += imageView.frame.size.height;

@@ -89,6 +89,8 @@
     [self.tableView reloadData];
 }
 
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -116,7 +118,7 @@
         cell = [nib objectAtIndex:0];
     }
     cell.mainLabel.text = [_posts[indexPath.row] title];
-    [cell.imageBlock setImageWithURL: [NSURL URLWithString:[_posts[indexPath.row] linkToPreview]]];
+    [cell.imageBlock setImageWithURL: [NSURL URLWithString:[_posts[indexPath.row]  linkToPreview]] placeholderImage:[UIImage imageNamed:@"default.png"]];
     cell.subLabel.text = [[_posts[indexPath.row] timePosted] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return cell;
 }

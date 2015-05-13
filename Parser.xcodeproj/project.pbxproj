@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84C3183B1B032CD00037C594 /* listofnews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84C318391B032CD00037C594 /* listofnews.xcdatamodeld */; };
 		84C6FD291B01964900E2325A /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD281B01964900E2325A /* DetailViewController.xib */; };
 		84C6FD2C1B01974800E2325A /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FD2B1B01974800E2325A /* Post.m */; };
 		84C6FD2E1B0197C600E2325A /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6FD2D1B0197C600E2325A /* MasterViewController.xib */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		082DA4B276324D5A3334120A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		84C3183A1B032CD00037C594 /* listofnews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = listofnews.xcdatamodel; sourceTree = "<group>"; };
 		84C6FD281B01964900E2325A /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		84C6FD2A1B01974800E2325A /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		84C6FD2B1B01974800E2325A /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				84CC7A3E1AF90BEA00A1ED98 /* MasterViewController.h */,
 				84CC7A3F1AF90BEA00A1ED98 /* MasterViewController.m */,
+				84C318391B032CD00037C594 /* listofnews.xcdatamodeld */,
 				84C6FD2D1B0197C600E2325A /* MasterViewController.xib */,
 			);
 			name = MasterViewController;
@@ -355,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84CC7A6F1AF9123800A1ED98 /* TFHppleElement.m in Sources */,
+				84C3183B1B032CD00037C594 /* listofnews.xcdatamodeld in Sources */,
 				84CC7A3D1AF90BEA00A1ED98 /* AppDelegate.m in Sources */,
 				84CC7A401AF90BEA00A1ED98 /* MasterViewController.m in Sources */,
 				84CC7A701AF9123800A1ED98 /* XPathQuery.m in Sources */,
@@ -500,6 +504,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -515,6 +520,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -583,6 +589,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84C318391B032CD00037C594 /* listofnews.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84C3183A1B032CD00037C594 /* listofnews.xcdatamodel */,
+			);
+			currentVersion = 84C3183A1B032CD00037C594 /* listofnews.xcdatamodel */;
+			path = listofnews.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84CC7A2C1AF90BEA00A1ED98 /* Project object */;
 }

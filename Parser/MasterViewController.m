@@ -89,7 +89,27 @@
     [self.tableView reloadData];
 }
 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Set app-wide shared cache (first number is megabyte value)
+    NSUInteger cacheSizeMemory = 100*1024*1024; // 100 MB
+    NSUInteger cacheSizeDisk = 100*1024*1024; // 100 MB
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];
+    [NSURLCache setSharedURLCache:sharedCache];
+    sleep(1); // Critically important line, sadly, but it's worth it!
+    return 1;
+}
 
+-(NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+    NSMutableDictionary *mutableUserInfo = [[cachedResponse userInfo] mutableCopy];
+    NSMutableData *mutableData = [[cachedResponse data] mutableCopy];
+    NSURLCacheStoragePolicy storagePolicy = NSURLCacheStorageAllowedInMemoryOnly;
+    return [[NSCachedURLResponse alloc] initWithResponse:[cachedResponse response]
+                                                    data:mutableData
+                                                userInfo:mutableUserInfo
+                                           storagePolicy:storagePolicy];
+}
 
 #pragma mark - Table view data source
 

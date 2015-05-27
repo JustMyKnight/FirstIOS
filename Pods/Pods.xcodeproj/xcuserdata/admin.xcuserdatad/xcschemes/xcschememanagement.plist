@@ -4,12 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AFNetworking.xcscheme</key>
+		<key>Pods-Parser-AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-Parser-hpple.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Parser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Widget-hpple.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Widget.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>B42AD9729BE469DF131040DD</key>
+		<key>00FA081EFFAD32935FC5384C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B85DD304B5FEE5E125D47BC3</key>
+		<key>578C3ADF986E641BEF1FC996</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>57DBE414B954F47C757E9571</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79566BCF4A692C53ED504FD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C6493CACCA3F91CD87244408</key>
 		<dict>
 			<key>primary</key>
 			<true/>

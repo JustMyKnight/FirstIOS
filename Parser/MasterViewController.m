@@ -89,6 +89,24 @@
     [self.tableView reloadData];
 }
 
+- (void) openlastnews
+{
+    //[self getLatestNews];
+    
+    NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:@"http://live.goodline.info/guest"]];
+    [self parser:data];
+    NSLog(@"privet");
+    if ([_posts count] > 0)
+    {
+        _DetailViewController.linkToFullPost = [_posts[0] linkToFullPost];
+        _DetailViewController.postTitle = [_posts[0] title];
+        [self presentViewController:_DetailNavigationController animated:YES completion:nil];
+        NSLog(@"YA SDELYAL'");
+    }
+    else
+        NSLog(@"AZAZAZA");
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Set app-wide shared cache (first number is megabyte value)

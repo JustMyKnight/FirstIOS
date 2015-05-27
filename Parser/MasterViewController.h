@@ -12,8 +12,9 @@
 
 @interface MasterViewController : UITableViewController
 
-@property (strong, nonatomic) DetailViewController *detailViewController;
+-(void) openlastnews;
 
+@property (strong, nonatomic) DetailViewController *detailViewController;
 
 @end
 

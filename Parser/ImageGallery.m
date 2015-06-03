@@ -15,6 +15,19 @@
 
 @implementation ImageGallery
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Назад" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+        leftBarButtonItem.tintColor = [UIColor blackColor];
+        [self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,6 +75,11 @@
         CustomImageGalleryCell *cell = (CustomImageGalleryCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         [cell.scrollView setZoomScale:1.0 animated:YES];
     }
+}
+
+- (IBAction)back
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

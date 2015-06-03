@@ -24,6 +24,7 @@
 
 @implementation MasterViewController
 
+//init AFNetworking connection for selected page
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -67,6 +68,7 @@
     [super viewWillAppear:animated];
 }
 
+//Parsing data from live.goodline.info
 - (void) parser:(NSData *)responseData
 {
     TFHpple *parser = [TFHpple hppleWithHTMLData:responseData];
@@ -89,6 +91,7 @@
     [self.tableView reloadData];
 }
 
+//open page with detail info about last news
 - (void) openlastnews
 {
     NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:@"http://live.goodline.info/guest"]];
@@ -113,17 +116,6 @@
     return 1;
 }
 
--(NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
-{
-    NSMutableDictionary *mutableUserInfo = [[cachedResponse userInfo] mutableCopy];
-    NSMutableData *mutableData = [[cachedResponse data] mutableCopy];
-    NSURLCacheStoragePolicy storagePolicy = NSURLCacheStorageAllowedInMemoryOnly;
-    return [[NSCachedURLResponse alloc] initWithResponse:[cachedResponse response]
-                                                    data:mutableData
-                                                userInfo:mutableUserInfo
-                                           storagePolicy:storagePolicy];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -136,6 +128,7 @@
     return [_posts count];
 }
 
+//change height of the cell in table
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 90;
@@ -156,6 +149,7 @@
     return cell;
 }
 
+//go to detail description of selected table
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _DetailViewController.linkToFullPost = [_posts[indexPath.row] linkToFullPost];
@@ -163,6 +157,7 @@
     [self presentViewController:_DetailNavigationController animated:YES completion:nil];
 }
 
+//load next page of the site
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger totalRow = [tableView numberOfRowsInSection:indexPath.section];

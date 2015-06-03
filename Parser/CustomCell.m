@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Admin. All rights reserved.
 //
 
+//Custom cell for MasterViewController table
 #import "CustomCell.h"
 
 @implementation CustomCell

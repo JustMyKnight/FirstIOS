@@ -14,9 +14,7 @@
 
 @property (strong, nonatomic) NSMutableData *htmlData;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
-
 @end
 
 @implementation TodayViewController

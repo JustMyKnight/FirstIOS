@@ -22,6 +22,7 @@
 
 @implementation DetailViewController
 
+// add custom text for leftbarbutton
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,6 +43,7 @@
     self.imageViewArray = [[NSMutableArray alloc] init];
 }
 
+//gest recognize for imagegallery
 - (void)imageViewTapGesture: (UITapGestureRecognizer *) gestureRecognizer
 {
     self.imageGallery = nil;
@@ -51,6 +53,7 @@
     [self.navigationController pushViewController:self.imageGallery animated:YES];
 }
 
+//AFNetworking init
 - (void)viewWillAppear:(BOOL)animated
 {
     [[_scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -58,7 +61,7 @@
     NSMutableAttributedString *atrString = [[NSMutableAttributedString alloc] initWithString:_postTitle
                                             ];
     [_scrollView setContentOffset:CGPointMake(0, 0)];
-    [self.imageViewArray removeAllObjects];
+    [self.imageViewArray removeAllObjects]; //clear all image in array
     UITextView *textBlock = [self createTextViewWithText:atrString];
     [_scrollView addSubview:textBlock];
     AFHTTPRequestOperationManager *data = [AFHTTPRequestOperationManager manager];
@@ -79,12 +82,13 @@
      }];
 }
 
+//autoresize of image in the gallery
 - (UIViewAutoresizing) setAutoresizing
 {
-    return (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin |
-            UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth);
+    return (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth);
 }
 
+//parse data from full news text
 - (void)parser: (NSData *)data
 {
     int tag = 0;
@@ -113,10 +117,7 @@
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapGesture:)];
             [imageView addGestureRecognizer:tapGesture];
             imageView.autoresizingMask = [self setAutoresizing];
-            
-            [self.imageViewArray addObject:imageView];
-            
-            
+            [self.imageViewArray addObject:imageView]; //add image into array of image
             [_scrollView addSubview:imageView];
             _yOffset += imageView.frame.size.height;
         }
@@ -136,6 +137,7 @@
     
 }
 
+//remove spaces from content
 - (NSAttributedString *)FindContent:(TFHppleElement *)node
 {
     NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithString:@""];
@@ -165,6 +167,7 @@
     return resultString;
 }
 
+//autoresize block with data
 - (UITextView *)createTextViewWithText: (NSMutableAttributedString *) string
 {
     UITextView *textBlock = [[UITextView alloc] initWithFrame:CGRectMake(0, _yOffset, _scrollView.frame.size.width, 10)];

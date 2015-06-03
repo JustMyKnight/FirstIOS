@@ -15,6 +15,7 @@
 
 @implementation ImageGallery
 
+// add custom text for leftbarbutton
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,7 +47,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height-100);
+    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height-110);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -79,7 +80,7 @@
 
 - (IBAction)back
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+   [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

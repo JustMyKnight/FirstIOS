@@ -8,6 +8,7 @@
 
 #import "CustomImageGalleryCell.h"
 
+//Create custom cell for ImageGallery
 @implementation CustomImageGalleryCell
 
 - (void)awakeFromNib {

@@ -14,7 +14,7 @@
 
 @implementation AppDelegate
 
-
+//App init
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MasterViewController *newsList = [[MasterViewController alloc] init];
@@ -25,6 +25,7 @@
     return YES;
 }
 
+//open url that was received from widget
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 { //NSLog(@"privet");
     MasterViewController *mainViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];

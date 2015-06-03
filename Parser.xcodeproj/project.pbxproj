@@ -70,6 +70,7 @@
 		449C43DB4971C38E77FFB8A6 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Widget/Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
 		48FD019428EF68E7FF8F9BE2 /* libPods-Parser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4B7F62674EBAF3DD11407C /* Pods-Parser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parser.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parser/Pods-Parser.release.xcconfig"; sourceTree = "<group>"; };
+		847D2A921B1EEC72005B10D8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		848A119F1B1EA94600AF6C19 /* ImageGallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGallery.h; sourceTree = "<group>"; };
 		848A11A01B1EA94600AF6C19 /* ImageGallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGallery.m; sourceTree = "<group>"; };
 		848A11A11B1EA94600AF6C19 /* ImageGallery.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageGallery.xib; sourceTree = "<group>"; };
@@ -452,7 +453,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = 84CC7A2B1AF90BEA00A1ED98;
@@ -616,6 +616,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				84CC7A4A1AF90BEA00A1ED98 /* Base */,
+				847D2A921B1EEC72005B10D8 /* ru */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

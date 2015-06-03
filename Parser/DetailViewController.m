@@ -10,11 +10,13 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "TFHpple.h"
-
+#import "ImageGallery.h"
 @interface DetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) NSMutableArray *imageViewArray;
+@property (strong, nonatomic) ImageGallery *imageGallery;
 @property int yOffset;
 @end
 
@@ -37,6 +39,16 @@
 {
     [super viewDidLoad];
     _scrollView.scrollEnabled = TRUE;
+    self.imageViewArray = [[NSMutableArray alloc] init];
+}
+
+- (void)imageViewTapGesture: (UITapGestureRecognizer *) gestureRecognizer
+{
+    self.imageGallery = nil;
+    self.imageGallery = [[ImageGallery alloc] init];
+    self.imageGallery.imageViewArray = self.imageViewArray;
+    self.imageGallery.currentCell = (int)gestureRecognizer.view.tag;
+    [self.navigationController pushViewController:self.imageGallery animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -45,6 +57,8 @@
     _yOffset = 0;
     NSMutableAttributedString *atrString = [[NSMutableAttributedString alloc] initWithString:_postTitle
                                             ];
+    [_scrollView setContentOffset:CGPointMake(0, 0)];
+    [self.imageViewArray removeAllObjects];
     UITextView *textBlock = [self createTextViewWithText:atrString];
     [_scrollView addSubview:textBlock];
     AFHTTPRequestOperationManager *data = [AFHTTPRequestOperationManager manager];
@@ -65,8 +79,15 @@
      }];
 }
 
+- (UIViewAutoresizing) setAutoresizing
+{
+    return (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin |
+            UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth);
+}
+
 - (void)parser: (NSData *)data
 {
+    int tag = 0;
     TFHpple *parser = [TFHpple hppleWithHTMLData:data];
     NSString *XpathString = @"//div[@class='topic-content text']";
     NSArray *postNodes = [parser searchWithXPathQuery:XpathString];
@@ -85,9 +106,15 @@
             }
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _yOffset, _scrollView.frame.size.width-10, _scrollView.frame.size.width*9/16)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
+            [imageView setImageWithURL:[NSURL URLWithString:[i objectForKey:@"src"]]];
+            imageView.userInteractionEnabled = YES;
+            imageView.tag = tag;
+            tag++;
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapGesture:)];
+            [imageView addGestureRecognizer:tapGesture];
+            imageView.autoresizingMask = [self setAutoresizing];
             
-                        
-            [imageView setImageWithURL:[NSURL URLWithString:[i objectForKey:@"src"]] placeholderImage:[UIImage imageNamed:@"default.png"]];
+            [self.imageViewArray addObject:imageView];
             
             
             [_scrollView addSubview:imageView];

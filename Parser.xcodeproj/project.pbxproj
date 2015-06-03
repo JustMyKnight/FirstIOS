@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		845E9CE21B1579310009F58E /* goodline_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 845E9CE11B1579310009F58E /* goodline_default.jpg */; };
+		848A11A21B1EA94600AF6C19 /* ImageGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A11A01B1EA94600AF6C19 /* ImageGallery.m */; };
+		848A11A31B1EA94600AF6C19 /* ImageGallery.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848A11A11B1EA94600AF6C19 /* ImageGallery.xib */; };
+		848A11A81B1EAA4B00AF6C19 /* CustomImageGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A11A61B1EAA4B00AF6C19 /* CustomImageGalleryCell.m */; };
+		848A11A91B1EAA4B00AF6C19 /* CustomImageGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848A11A71B1EAA4B00AF6C19 /* CustomImageGalleryCell.xib */; };
+		848A11AC1B1EAD1800AF6C19 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 848A11AB1B1EAD1800AF6C19 /* default.png */; };
 		849BCA871B156F0E000778D9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849BCA861B156F0E000778D9 /* NotificationCenter.framework */; };
 		849BCA8D1B156F0E000778D9 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849BCA8C1B156F0E000778D9 /* TodayViewController.m */; };
 		849BCA921B156F0E000778D9 /* Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 849BCA851B156F0E000778D9 /* Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -66,7 +70,13 @@
 		449C43DB4971C38E77FFB8A6 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Widget/Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
 		48FD019428EF68E7FF8F9BE2 /* libPods-Parser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4B7F62674EBAF3DD11407C /* Pods-Parser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parser.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parser/Pods-Parser.release.xcconfig"; sourceTree = "<group>"; };
-		845E9CE11B1579310009F58E /* goodline_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goodline_default.jpg; sourceTree = "<group>"; };
+		848A119F1B1EA94600AF6C19 /* ImageGallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGallery.h; sourceTree = "<group>"; };
+		848A11A01B1EA94600AF6C19 /* ImageGallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGallery.m; sourceTree = "<group>"; };
+		848A11A11B1EA94600AF6C19 /* ImageGallery.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageGallery.xib; sourceTree = "<group>"; };
+		848A11A51B1EAA4B00AF6C19 /* CustomImageGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageGalleryCell.h; sourceTree = "<group>"; };
+		848A11A61B1EAA4B00AF6C19 /* CustomImageGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageGalleryCell.m; sourceTree = "<group>"; };
+		848A11A71B1EAA4B00AF6C19 /* CustomImageGalleryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomImageGalleryCell.xib; sourceTree = "<group>"; };
+		848A11AB1B1EAD1800AF6C19 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		849BCA851B156F0E000778D9 /* Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		849BCA861B156F0E000778D9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		849BCA8A1B156F0E000778D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,6 +170,73 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		848A119A1B1EA84E00AF6C19 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				848A11A41B1EAA2D00AF6C19 /* CustomImageGalleryCell */,
+				84C6FD381B01A57D00E2325A /* CustomCell */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		848A119B1B1EA85E00AF6C19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				848A11AA1B1EAC8800AF6C19 /* AppDelegate */,
+				848A119E1B1EA90000AF6C19 /* Gallery */,
+				848A119D1B1EA88A00AF6C19 /* Post */,
+				848A119C1B1EA87200AF6C19 /* Views */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		848A119C1B1EA87200AF6C19 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84C6FD371B01A55D00E2325A /* DetailViewController */,
+				84C6FD361B01A52F00E2325A /* MasterViewController */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		848A119D1B1EA88A00AF6C19 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				84C6FD2A1B01974800E2325A /* Post.h */,
+				84C6FD2B1B01974800E2325A /* Post.m */,
+			);
+			name = Post;
+			sourceTree = "<group>";
+		};
+		848A119E1B1EA90000AF6C19 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				848A119F1B1EA94600AF6C19 /* ImageGallery.h */,
+				848A11A01B1EA94600AF6C19 /* ImageGallery.m */,
+				848A11A11B1EA94600AF6C19 /* ImageGallery.xib */,
+			);
+			name = Gallery;
+			sourceTree = "<group>";
+		};
+		848A11A41B1EAA2D00AF6C19 /* CustomImageGalleryCell */ = {
+			isa = PBXGroup;
+			children = (
+				848A11A51B1EAA4B00AF6C19 /* CustomImageGalleryCell.h */,
+				848A11A61B1EAA4B00AF6C19 /* CustomImageGalleryCell.m */,
+				848A11A71B1EAA4B00AF6C19 /* CustomImageGalleryCell.xib */,
+			);
+			name = CustomImageGalleryCell;
+			sourceTree = "<group>";
+		};
+		848A11AA1B1EAC8800AF6C19 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				84CC7A3B1AF90BEA00A1ED98 /* AppDelegate.h */,
+				84CC7A3C1AF90BEA00A1ED98 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 		849BCA881B156F0E000778D9 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +251,7 @@
 		849BCA891B156F0E000778D9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				845E9CE11B1579310009F58E /* goodline_default.jpg */,
+				848A11AB1B1EAD1800AF6C19 /* default.png */,
 				849BCA8A1B156F0E000778D9 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -236,15 +313,10 @@
 		84CC7A361AF90BEA00A1ED98 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				848A119B1B1EA85E00AF6C19 /* Model */,
+				848A119A1B1EA84E00AF6C19 /* CustomCells */,
 				84C7EDF61B01FD5F00589E27 /* default.png */,
-				84C6FD381B01A57D00E2325A /* CustomCell */,
-				84C6FD371B01A55D00E2325A /* DetailViewController */,
-				84C6FD361B01A52F00E2325A /* MasterViewController */,
-				84C6FD2A1B01974800E2325A /* Post.h */,
-				84C6FD2B1B01974800E2325A /* Post.m */,
 				84CC7A671AF9118800A1ED98 /* hpple */,
-				84CC7A3B1AF90BEA00A1ED98 /* AppDelegate.h */,
-				84CC7A3C1AF90BEA00A1ED98 /* AppDelegate.m */,
 				84CC7A471AF90BEA00A1ED98 /* Images.xcassets */,
 				84CC7A491AF90BEA00A1ED98 /* LaunchScreen.xib */,
 				84CC7A371AF90BEA00A1ED98 /* Supporting Files */,
@@ -398,8 +470,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845E9CE21B1579310009F58E /* goodline_default.jpg in Resources */,
 				849BCA981B156FBF000778D9 /* TodayViewController.xib in Resources */,
+				848A11AC1B1EAD1800AF6C19 /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +480,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84CC7A481AF90BEA00A1ED98 /* Images.xcassets in Resources */,
+				848A11A91B1EAA4B00AF6C19 /* CustomImageGalleryCell.xib in Resources */,
 				84C6FD291B01964900E2325A /* DetailViewController.xib in Resources */,
+				848A11A31B1EA94600AF6C19 /* ImageGallery.xib in Resources */,
 				84C6FD3D1B01AD6500E2325A /* CustomCell.xib in Resources */,
 				84C6FD2E1B0197C600E2325A /* MasterViewController.xib in Resources */,
 				84C7EDF71B01FD5F00589E27 /* default.png in Resources */,
@@ -502,8 +576,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				84CC7A3D1AF90BEA00A1ED98 /* AppDelegate.m in Sources */,
+				848A11A81B1EAA4B00AF6C19 /* CustomImageGalleryCell.m in Sources */,
 				84CC7A401AF90BEA00A1ED98 /* MasterViewController.m in Sources */,
 				84CC7A3A1AF90BEA00A1ED98 /* main.m in Sources */,
+				848A11A21B1EA94600AF6C19 /* ImageGallery.m in Sources */,
 				84CC7A431AF90BEA00A1ED98 /* DetailViewController.m in Sources */,
 				84C6FD2C1B01974800E2325A /* Post.m in Sources */,
 				84C6FD3C1B01AD6500E2325A /* CustomCell.m in Sources */,
@@ -549,6 +625,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ED22F24F281643B6E4AD9BE7 /* Pods-Widget.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -571,6 +649,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 449C43DB4971C38E77FFB8A6 /* Pods-Widget.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public/hpple\"",

@@ -91,8 +91,6 @@
 
 - (void) openlastnews
 {
-    //[self getLatestNews];
-    
     NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:@"http://live.goodline.info/guest"]];
     [self parser:data];
     NSLog(@"privet");
@@ -101,20 +99,17 @@
         _DetailViewController.linkToFullPost = [_posts[0] linkToFullPost];
         _DetailViewController.postTitle = [_posts[0] title];
         [self presentViewController:_DetailNavigationController animated:YES completion:nil];
-        NSLog(@"YA SDELYAL'");
     }
-    else
-        NSLog(@"AZAZAZA");
 }
 
+//Data caching
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Set app-wide shared cache (first number is megabyte value)
-    NSUInteger cacheSizeMemory = 100*1024*1024; // 100 MB
-    NSUInteger cacheSizeDisk = 100*1024*1024; // 100 MB
+    NSUInteger cacheSizeMemory = 100*1024*1024;
+    NSUInteger cacheSizeDisk = 100*1024*1024;
     NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];
     [NSURLCache setSharedURLCache:sharedCache];
-    sleep(1); // Critically important line, sadly, but it's worth it!
+    sleep(1);
     return 1;
 }
 
@@ -156,7 +151,7 @@
         cell = [nib objectAtIndex:0];
     }
     cell.mainLabel.text = [_posts[indexPath.row] title];
-    [cell.imageBlock setImageWithURL: [NSURL URLWithString:[_posts[indexPath.row]  linkToPreview]] placeholderImage:[UIImage imageNamed:@"default.png"]];
+    [cell.imageBlock setImageWithURL: [NSURL URLWithString:[_posts[indexPath.row] linkToPreview]] placeholderImage:[UIImage imageNamed:@"default.png"]];
     cell.subLabel.text = [[_posts[indexPath.row] timePosted] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return cell;
 }
@@ -182,11 +177,8 @@
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
          {
              NSLog(@"Error: %@", error);
-             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network problem"
-                                                                 message:[error localizedDescription]
-                                                                delegate:nil
-                                                       cancelButtonTitle:@"Ok"
-                                                       otherButtonTitles:nil];
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network problem" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok"
+                                            otherButtonTitles:nil];
              [alertView show];
          }];
     }

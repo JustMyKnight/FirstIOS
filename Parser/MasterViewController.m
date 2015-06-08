@@ -33,6 +33,7 @@
     self.navigationItem.title = @"GoodLineNews";
     AFHTTPRequestOperationManager *data = [AFHTTPRequestOperationManager manager];
     data.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
     [data GET:@"http://live.goodline.info/guest" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          [self parser:responseObject];

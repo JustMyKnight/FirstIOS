@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-@interface Post : NSObject
+@interface Post : NSObject <NSCoding>
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *linkToPreview;
